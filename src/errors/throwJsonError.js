@@ -5,4 +5,4 @@ function throwJsonError(status, message){
     throw error
 }
 
-module.exports = throwJsonError
+module.exports = throwJsonError;
