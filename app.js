@@ -8,6 +8,12 @@ const {comentariesRoutes} = require("./src/routes/comentariesRoutes");
 
 
 const app = express();
+const morgan = require('morgan');
+app.use(morgan('dev'));
+
+
+
+
 app.use(express.json());
 app.use(cors());
 app.use(fileUpload());
