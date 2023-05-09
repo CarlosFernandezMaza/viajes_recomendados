@@ -32,7 +32,7 @@ const findTripByCity = async (city) => {
   const sql = `SELECT * FROM trips WHERE city = ?`;
   const [trips] = await pool.query(sql, [city]);
 
-  return trips[0];
+  return trips;
 };
 
 const findTripByCategory = async (category) => {
@@ -40,7 +40,7 @@ const findTripByCategory = async (category) => {
   const sql = `SELECT * FROM trips WHERE category = ?`;
   const [trips] = await pool.query(sql, [category]);
 
-  return trips[0];
+  return trips;
 };
 
 
@@ -49,8 +49,40 @@ const findTripByCityAndCategory = async (city, category) => {
   const sql = `SELECT * FROM trips WHERE city = ? AND category = ?`;
   const [trips] = await pool.query(sql, [city, category]);
 
-  return trips[0];
+  return trips;
 };
+
+
+
+const tripsCityOrderByVotes = async (city) => {
+  const pool = await getConnection();
+  const sql = `SELECT * FROM trips WHERE city = ? ORDER BY votes DESC;`;
+  const [trips] = await pool.query(sql, [city]);
+
+  return trips;
+
+};
+
+const tripsCategoryOrderByVotes = async (category) => {
+  const pool = await getConnection();
+  const sql = `SELECT * FROM trips WHERE category = ? ORDER BY votes DESC;`;
+  const [trips] = await pool.query(sql, [category]);
+
+  return trips;
+
+};
+
+const tripsCityCategoryOrderByVotes = async (city, category) => {
+  const pool = await getConnection();
+  const sql = `SELECT * FROM trips WHERE city = ? AND category = ? ORDER BY votes DESC;`;
+  const [trips] = await pool.query(sql, [city, category]);
+
+  return trips;
+
+};
+
+
+
     
   
   module.exports = {
@@ -58,6 +90,10 @@ const findTripByCityAndCategory = async (city, category) => {
   findTripById,
   findTripByCity,
   findTripByCategory,
-  findTripByCityAndCategory
+  findTripByCityAndCategory,
+  tripsCategoryOrderByVotes,
+  tripsCityOrderByVotes,
+  tripsCityCategoryOrderByVotes,
+  
   
   }

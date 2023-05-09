@@ -7,6 +7,7 @@ const {tripsRoutes} = require("./src/routes/tripsRoutes");
 const {comentariesRoutes} = require("./src/routes/comentariesRoutes");
 
 
+
 const app = express();
 const morgan = require('morgan');
 app.use(morgan('dev'));
