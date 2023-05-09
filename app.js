@@ -2,10 +2,9 @@ const express = require("express");
 require("dotenv").config();
 const cors = require("cors");
 const fileUpload = require("express-fileupload");
-const {userRoutes} = require("./src/routes/userRoutes");
-const {tripsRoutes} = require("./src/routes/tripsRoutes");
-const {comentariesRoutes} = require("./src/routes/comentariesRoutes");
-
+const { userRoutes } = require("./src/routes/userRoutes");
+const { tripsRoutes } = require("./src/routes/tripsRoutes");
+const { comentariesRoutes } = require("./src/routes/comentariesRoutes");
 
 const app = express();
 app.use(express.json());
@@ -17,17 +16,18 @@ const { PORT } = process.env;
 
 const port = PORT || 3000;
 
-app.use("/api/v1/users", userRoutes)
-app.use("/api/v1/trips", tripsRoutes)
-app.use("/api/v1/comentaries", comentariesRoutes)
+app.use("/api/v1/users", userRoutes);
+app.use("/api/v1/trips", tripsRoutes);
+app.use("/api/v1/comentaries", comentariesRoutes);
 
 //Middleware de 404
 app.use((req, res) =>
-res.status(404).send({
-    status: 'error',
+  res.status(404).send({
+    status: "error",
     message: "Not Found",
-}))
+  })
+);
 
-app.listen(port, () =>{
-    console.log(`Running on port ${port}`)
+app.listen(port, () => {
+  console.log(`Running on port ${port}`);
 });
