@@ -10,6 +10,15 @@ const findUserByEmail = async (email) => {
 
 }
 
+const findUserById = async(id) => {
+    const pool = await getConnection();
+    const sql = `SELECT user_name, email, createAt, image, bio FROM users WHERE id = ?`
+    const [user] = await pool.query(sql, id);
+
+    return user[0];
+
+}
+
 const createUser = async (userDB) => {
 
     const { name, lastname, user_name, email, passwordHash, verificationCode} = userDB 
@@ -50,4 +59,4 @@ const findTripById = async (id) => {
   };
 
 
-module.exports = {findUserByEmail, createUser, findUserByCode, activateUserByCode, findTripById};
+module.exports = {findUserByEmail, createUser, findUserByCode, activateUserByCode, findTripById, findUserById};

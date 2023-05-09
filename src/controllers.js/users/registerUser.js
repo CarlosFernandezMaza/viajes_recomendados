@@ -3,10 +3,11 @@ const bcrypt = require("bcrypt")
 const randomstring = require("randomstring");
 
 
-const throwJsonError = require("../errors/throwJsonError");
-const createJsonError = require("../errors/createJsonError");
-const { findUserByEmail, createUser } = require("../repositories.js/usersRepository");
-const { sendEmailRegister } = require("../helpers.js/mailSmtp");
+const throwJsonError = require("../../errors/throwJsonError");
+const createJsonError = require("../../errors/createJsonError");
+
+const { sendEmailRegister } = require("../../helpers.js/mailSmtp");
+const { findUserByEmail, createUser } = require("../../repositories.js/usersRepository");
 
 
 

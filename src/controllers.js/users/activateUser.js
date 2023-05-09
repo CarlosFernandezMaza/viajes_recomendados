@@ -1,7 +1,8 @@
-const createJsonError = require("../errors/createJsonError");
-const throwJsonError = require("../errors/throwJsonError");
-const { sendEmailConfirmation } = require("../helpers.js/mailSmtp");
-const { findUserByCode, activateUserByCode } = require("../repositories.js/usersRepository");
+const createJsonError = require("../../errors/createJsonError");
+const throwJsonError = require("../../errors/throwJsonError");
+const { sendEmailConfirmation } = require("../../helpers.js/mailSmtp");
+const { activateUserByCode, findUserByCode } = require("../../repositories.js/usersRepository");
+
 
 
 const activateUser = async (req, res ) => {

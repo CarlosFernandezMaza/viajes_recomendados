@@ -1,12 +1,11 @@
 
 const Joi = require("joi");
-const throwJsonError = require("../errors/throwJsonError");
-const createJsonError = require("../errors/createJsonError");
-
-
+const throwJsonError = require("../../errors/throwJsonError");
+const createJsonError = require("../../errors/createJsonError");
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken");
-const { findUserByEmail } = require("../repositories.js/usersRepository");
+const { findUserByEmail } = require("../../repositories.js/usersRepository");
+
 
 const schema = Joi.object().keys({
     email: Joi.string().email().required(),
@@ -20,7 +19,7 @@ const loginUser = async(req, res) => {
         await schema.validateAsync(body)
 
         const{email, password} = req.body
-        console.log(email, password)
+        
 
         const user = await findUserByEmail(email);
 
@@ -50,12 +49,12 @@ const loginUser = async(req, res) => {
         }
 
         const token = jwt.sign(tokenPayLoad, JWT_SECRET, {
-            expiresIn: "10m"
+            expiresIn: "20m"
         })
 
         const response = {
             accesToken: token,
-            expiresIn: "10m"
+            expiresIn: "20m"
         }
 
 
