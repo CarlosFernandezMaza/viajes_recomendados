@@ -22,6 +22,15 @@ const findTripById = async (ID) => {
   return trips[0];
 };
 
+
+const findUserIdInTrip = async (idTrip) => {
+  const pool = await getConnection();
+  const sql = `SELECT  users.id FROM db_viajes.trips join users on users.id = trips.IdUser where trips.id = ?`;
+  const [id] = await pool.query(sql, [idTrip]);
+
+  return id;
+}
+
 const findTripByCity = async (city) => {
   const pool = await getConnection();
   const sql = `SELECT * FROM trips WHERE city = ?`;
@@ -108,6 +117,7 @@ const addimage = async (imageName, idTrip) => {
   tripsCityOrderByVotes,
   tripsCityCategoryOrderByVotes,
   addTrip,
-  addimage
+  addimage,
+  findUserIdInTrip
   
   }

@@ -5,7 +5,7 @@ const randomstring = require("randomstring");
 const throwJsonError = require("../../errors/throwJsonError");
 const createJsonError = require("../../errors/createJsonError");
 const { findTripById } = require("../../repositories.js/usersRepository");
-const { addimage } = require("../../repositories.js/tripsRepositories");
+const { addimage, findUserIdInTrip } = require("../../repositories.js/tripsRepositories");
 
 
 const updateTripImage = async (req, res) =>{
@@ -13,6 +13,13 @@ const updateTripImage = async (req, res) =>{
 
         const {id, email} = req.auth;
         const {id:idTrip} = req.params;
+        
+        //comprobar que el idTrip corresponda al id del user!!!
+        const [idUser] = await findUserIdInTrip(idTrip)
+
+        if(idUser.id !== id){
+            throwJsonError(400, "No puedes actualizar la imagen de otro usuario.")
+        }
         
 
         const validateExtension = [".jpeg", ".jpg", ".png"]
@@ -32,10 +39,13 @@ const updateTripImage = async (req, res) =>{
             throwJsonError(400, "Formato no valido")
         }
 
-        const user = await  findTripById(idTrip);
-        console.log(user)
-        const {image} = user
+        const trip = await  findTripById(idTrip);
+        console.log("*********")
+        console.log(trip)
+        console.log("*********")
+        const {image} = trip
 
+        
         const pathTripImage = path.join(__dirname, "../../../public/tripImages")
         const random = randomstring.generate(10)
         const imageName = `${id}-${random}${extension}`
