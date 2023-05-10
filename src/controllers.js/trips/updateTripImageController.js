@@ -14,7 +14,7 @@ const updateTripImage = async (req, res) =>{
         const {id, email} = req.auth;
         const {id:idTrip} = req.params;
         
-        //comprobar que el idTrip corresponda al id del user!!!
+        
         const [idUser] = await findUserIdInTrip(idTrip)
 
         if(idUser.id !== id){

@@ -17,7 +17,8 @@ const schema = Joi.object().keys({
     user_name: Joi.string().min(4).max(120).required(),
     email: Joi.string().email().required(),
     password: Joi.string().min(6).max(20).required(),
-    verifyPassword: Joi.ref("password")
+    verifyPassword: Joi.ref("password"),
+    bio: Joi.string().min(4).max(500)
 })
 
 const registerUser = async (req, res) => {
@@ -26,7 +27,7 @@ const registerUser = async (req, res) => {
     const {body} = req;
     await schema.validateAsync(body)
 
-    const {name, lastname, user_name, email, password} = body;
+    const {name, lastname, user_name, email, password, bio} = body;
 
     const user = await findUserByEmail(email);
     
@@ -38,7 +39,7 @@ const registerUser = async (req, res) => {
     const verificationCode = randomstring.generate(64);
 
     const userDB = {
-        name, lastname, user_name, email, passwordHash, verificationCode
+        name, lastname, user_name, email, passwordHash, verificationCode, bio
     }
 
     const userId = await createUser(userDB)

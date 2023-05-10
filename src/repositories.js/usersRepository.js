@@ -21,15 +21,32 @@ const findUserById = async(id) => {
 
 const createUser = async (userDB) => {
 
-    const { name, lastname, user_name, email, passwordHash, verificationCode} = userDB 
+    const { name, lastname, user_name, email, passwordHash, verificationCode, bio} = userDB 
 
     const pool = await getConnection();
-    const sql = `INSERT INTO USERS (name, lastname, user_name, email, password, verificationCode) VALUES ( ?, ?, ?, ?, ?, ?);`
-    const [created] = await pool.query(sql, [name, lastname, user_name, email, passwordHash, verificationCode]);
+    const sql = `INSERT INTO USERS (name, lastname, user_name, email, password, verificationCode, bio) VALUES ( ?, ?, ?, ?, ?, ?, ?);`
+    const [created] = await pool.query(sql, [name, lastname, user_name, email, passwordHash, verificationCode, bio]);
 
     return created.insertId;
 
 }
+
+const newProfile = async (userData, id) => {
+    const { name, lastname, user_name, passwordHash, bio } = userData;
+    console.log(userData)
+    const pool = await getConnection();
+    const sql = `UPDATE users SET name=?, lastname=?, user_name=?, password=?, bio=? WHERE id = ?`;
+    const [created] = await pool.query(sql, [
+      name,
+      lastname,
+      user_name,
+      passwordHash,
+      bio,
+      id
+    ]);
+    
+    return created.affectedRows;
+  };
 
 const findUserByCode = async (code) => {
 
@@ -58,5 +75,12 @@ const findTripById = async (id) => {
     return trip[0];
   };
 
+  const addAvatarimage = async (imageName, id) => {
+    const pool = await getConnection();
+    const sql = `UPDATE users SET image = ? WHERE id = ?`
+    const [user] = await pool.query(sql, [imageName, id ]);
+        return user.insertId;
+  }
 
-module.exports = {findUserByEmail, createUser, findUserByCode, activateUserByCode, findTripById, findUserById};
+
+module.exports = {findUserByEmail, createUser, findUserByCode, activateUserByCode, findTripById, findUserById, newProfile, addAvatarimage};
