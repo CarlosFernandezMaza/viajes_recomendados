@@ -76,6 +76,24 @@ const tripsCityCategoryOrderByVotes = async (city, category) => {
 
 };
 
+const addTrip = async(body, id) => {
+
+  const {title, dateExperience, category, city, excerpt, description} = body;
+  const now = new Date();
+
+  const pool = await getConnection();
+  const sql = `INSERT INTO TRIPS (idUser, title, createAt, dateExperience,  category, city, excerpt, description)VALUES(?,?,?,?,?,?,?,?)`
+  const [trip] = await pool.query(sql, [id, title, now, dateExperience, category, city, excerpt, description ]);
+      return trip.insertId;
+}
+
+const addimage = async (imageName, idTrip) => {
+  const pool = await getConnection();
+  const sql = `UPDATE trips SET image = ? WHERE id = ?`
+  const [trip] = await pool.query(sql, [imageName, idTrip ]);
+      return trip.insertId;
+}
+
 
 
     
@@ -89,6 +107,7 @@ const tripsCityCategoryOrderByVotes = async (city, category) => {
   tripsCategoryOrderByVotes,
   tripsCityOrderByVotes,
   tripsCityCategoryOrderByVotes,
-  
+  addTrip,
+  addimage
   
   }
