@@ -15,7 +15,7 @@ const controllerTrips = async (req, res) => {
     
     console.log('Se muestran todos los viajes')
     
-    res.status(200).json(trips);
+    res.status(200);
     res.send(trips)
   } catch (error) {
     console.error("error");
