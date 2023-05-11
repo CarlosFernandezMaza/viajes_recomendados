@@ -3,6 +3,7 @@ const { addAvatarimage, findUserById } = require("../../repositories.js/usersRep
 const path = require("path");
 const fs = require("fs").promises
 const randomstring = require("randomstring");
+const sharp = require("sharp")
 
 const updateUserImage = async(req, res) => {
     try {
@@ -44,21 +45,20 @@ const updateUserImage = async(req, res) => {
             await fs.unlink(path.join(pathTripImage, image))
         }
 
-       
-
+    
         avatar.mv(pathImage, async function(err){
             if(err) return res.status(500).send(err)
 
-            //aca esta el error!!!!!
+
             await addAvatarimage(imageName, id);
-           
+
            res.status(200);
             res.send(`Imagen de perfil actualizada correctamente`)
         })
 
-       
+        
 
-
+    
     } catch (error) {
         createJsonError(error, res)
     }

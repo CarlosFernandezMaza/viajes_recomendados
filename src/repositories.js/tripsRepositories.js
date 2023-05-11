@@ -103,10 +103,29 @@ const addimage = async (imageName, idTrip) => {
       return trip.insertId;
 }
 
+const deleteTrip = async (id, userId) => {
+  const pool = await getConnection();
+  const [trip] = await pool.query(`SELECT * FROM trips WHERE id = ?`, [id]);
 
-
-    
+  if (trip.length === 0) {
+    return null;
+  }
   
+  
+  if (trip[0].IdUser !== userId) {
+    throw new Error("No estás autorizado para borrar esta recomendación");
+  }
+
+  const [result] = await pool.query(`DELETE FROM trips WHERE id = ?`, [id]);
+
+  if (result.affectedRows !== 1) {
+    throw new Error("Error al borrar la recomendación");
+  }
+
+  return trip[0];
+};
+
+
   module.exports = {
   findAllTrips,
   findTripById,
@@ -118,6 +137,7 @@ const addimage = async (imageName, idTrip) => {
   tripsCityCategoryOrderByVotes,
   addTrip,
   addimage,
-  findUserIdInTrip
+  findUserIdInTrip,
+  deleteTrip
   
   }
