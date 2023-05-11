@@ -17,6 +17,7 @@ const updateUserImage = async(req, res) => {
         
          const {avatar} = files;
         
+         
 
         if(!files){
             throwJsonError(400, "No se ha seleccionado el fichero")
@@ -45,20 +46,17 @@ const updateUserImage = async(req, res) => {
             await fs.unlink(path.join(pathTripImage, image))
         }
 
-    
-        avatar.mv(pathImage, async function(err){
-            if(err) return res.status(500).send(err)
+        const imageSharp = sharp(avatar.data);
+         
+        await imageSharp.resize(400,400).toFile(pathImage);
 
+        await addAvatarimage(imageName, id);
 
-            await addAvatarimage(imageName, id);
+       
+        res.status(200);
+        res.send(`Imagen de perfil actualizada correctamente`)
 
-           res.status(200);
-            res.send(`Imagen de perfil actualizada correctamente`)
-        })
-
-        
-
-    
+       
     } catch (error) {
         createJsonError(error, res)
     }

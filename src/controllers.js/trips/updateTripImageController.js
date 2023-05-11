@@ -4,9 +4,9 @@ const fs = require("fs").promises
 const randomstring = require("randomstring");
 const throwJsonError = require("../../errors/throwJsonError");
 const createJsonError = require("../../errors/createJsonError");
-const { findTripById } = require("../../repositories.js/usersRepository");
+const { findTripById, addAvatarimage } = require("../../repositories.js/usersRepository");
 const { addimage, findUserIdInTrip } = require("../../repositories.js/tripsRepositories");
-
+const sharp = require("sharp")
 
 const updateTripImage = async (req, res) =>{
     try {
@@ -16,7 +16,7 @@ const updateTripImage = async (req, res) =>{
         
         
         const [idUser] = await findUserIdInTrip(idTrip)
-
+       
         if(idUser.id !== id){
             throwJsonError(400, "No puedes actualizar la imagen de otro usuario.")
         }
@@ -38,11 +38,10 @@ const updateTripImage = async (req, res) =>{
         if(!validateExtension.includes(extension)){
             throwJsonError(400, "Formato no valido")
         }
+        
 
         const trip = await  findTripById(idTrip);
-        console.log("*********")
-        console.log(trip)
-        console.log("*********")
+       
         const {image} = trip
 
         
@@ -58,17 +57,18 @@ const updateTripImage = async (req, res) =>{
             await fs.unlink(path.join(pathTripImage, image))
         }
 
-       
+        const imageSharp = sharp(tripImage.data);
+         
+        await imageSharp.resize(600,400).toFile(pathImage);
 
-        tripImage.mv(pathImage, async function(err){
-            if(err) return res.status(500).send(err)
+        await addAvatarimage(imageName, id);
 
-            //aca esta el error!!!!!
-            await addimage(imageName, idTrip);
-           
-           res.status(200);
-            res.send(`Imagen actualizada correctamente`)
-        })
+        await addimage(imageName, idTrip);
+
+    
+      
+        res.status(200);
+        res.send(`Imagen actualizada correctamente`)
 
        
 
