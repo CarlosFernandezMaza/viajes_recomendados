@@ -64,6 +64,7 @@ const updateTripImage = async (req, res) =>{
         await addAvatarimage(imageName, id);
 
         await addimage(imageName, idTrip);
+        //dasd
 
     
       
