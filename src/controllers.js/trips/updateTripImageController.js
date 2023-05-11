@@ -22,7 +22,7 @@ const updateTripImage = async (req, res) =>{
         }
         
 
-        const validateExtension = [".jpeg", ".jpg", ".png"]
+        const validateExtension = [".jpeg", ".jpg", ".png", ".JPEG", ".JPG", ".PNG"]
 
          const {files} = req;
         
