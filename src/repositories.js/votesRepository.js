@@ -5,7 +5,7 @@ const VotesByTripById = async (IdTrip) => {
     const sql = `SELECT * FROM db_viajes.votes WHERE IdTrip = ?`;
     const [votes] = await pool.query(sql, [IdTrip]);
 
-    return votes[0];
+    return votes;
   };
 
 const addVote = async(idUser, idTrip) => {

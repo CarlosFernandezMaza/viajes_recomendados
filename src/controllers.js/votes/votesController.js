@@ -15,7 +15,7 @@ const controllerVotes = async (req, res) => {
   
       const votes = await VotesByTripById(id);
       
-      if (!votes) {
+      if (votes.length === 0) {
         throwJsonError(400, `No hay votos en el viaje con la ID :${id}`)
       }
       res.status(200);
