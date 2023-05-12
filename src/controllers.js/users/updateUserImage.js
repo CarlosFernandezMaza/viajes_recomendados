@@ -3,7 +3,8 @@ const { addAvatarimage, findUserById } = require("../../repositories.js/usersRep
 const path = require("path");
 const fs = require("fs").promises
 const randomstring = require("randomstring");
-const sharp = require("sharp")
+const sharp = require("sharp");
+const throwJsonError = require("../../errors/throwJsonError");
 
 const updateUserImage = async(req, res) => {
     try {
@@ -14,14 +15,16 @@ const updateUserImage = async(req, res) => {
         const validateExtension = [".jpeg", ".jpg", ".png"]
 
          const {files} = req;
+
+         if(!files){
+            throwJsonError(400, "No se ha seleccionado el fichero")
+        }
         
          const {avatar} = files;
         
          
 
-        if(!files){
-            throwJsonError(400, "No se ha seleccionado el fichero")
-        }
+        
 
         const extension =  path.extname(avatar.name)
 

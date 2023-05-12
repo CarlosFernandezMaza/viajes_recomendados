@@ -6,8 +6,8 @@ const throwJsonError = require("../../errors/throwJsonError");
 
 const schema = Joi.object().keys({
   name: Joi.string().min(4).max(120).required(),
-  lastname: Joi.string().min(4).max(120).required(),
-  user_name: Joi.string().min(4).max(120).required(),
+  lastName: Joi.string().min(4).max(120).required(),
+  userName: Joi.string().min(4).max(120).required(),
   password: Joi.string().min(6).max(20).required(),
   verifyPassword: Joi.ref("password"),
   bio: Joi.string().min(6).max(500)
@@ -19,15 +19,15 @@ const updateProfile = async (req, res) => {
     const {id} = req.auth;
     await schema.validateAsync(body);
 
-    const { name, lastname, user_name, password, bio } = body; //VER SI SE PUEDE ACTUALIZAR EMAIL MAS ADELANTE
+    const { name, lastName, userName, password, bio } = body; //VER SI SE PUEDE ACTUALIZAR EMAIL MAS ADELANTE
     
     
     const passwordHash = await bcrypt.hash(password, 12);
 
     const userData = {
       name,
-      lastname,
-      user_name,
+      lastName,
+      userName,
       passwordHash,
       bio,
     };

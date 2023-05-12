@@ -1,21 +1,18 @@
 const express = require("express");
-const { controllerTrips, controllerTripsById, controllerTripsByCategory, controllerTripsByCity, controllerTripsByCityAndCategory, controllerRatingCity, controllerRatingCategory, controllerRatingCityCategory } = require("../controllers.js/trips/tripsController");
 const createTrip = require("../controllers.js/trips/createTripController");
 const tripsRoutes = express.Router();
 const validateAuth = require("../middlewares/validateAuth");
 const updateTripImage = require("../controllers.js/trips/updateTripImageController");
 const { deleteTripController } = require("../controllers.js/trips/deleteTripController");
+const getTrips = require("../controllers.js/trips/tripsController");
+const getTripById = require("../controllers.js/trips/getTripByIdController");
+
 
 
 //endpoints publicos
-tripsRoutes.get('/', controllerTrips);
-tripsRoutes.get('/:id', controllerTripsById);
-tripsRoutes.get('/category/:category', controllerTripsByCategory);
-tripsRoutes.get('/city/:city', controllerTripsByCity);
-tripsRoutes.get('/city/:city/category/:category', controllerTripsByCityAndCategory);
-tripsRoutes.get('/city/:city/rating', controllerRatingCity);
-tripsRoutes.get('/category/:category/rating', controllerRatingCategory);
-tripsRoutes.get('/city/:city/category/:category/rating',controllerRatingCityCategory);
+tripsRoutes.get('/', getTrips);
+tripsRoutes.get('/:id', getTripById);
+
 
 //endpoints privados
 tripsRoutes.route("/").all(validateAuth).post(createTrip);

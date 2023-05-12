@@ -24,17 +24,15 @@ const createTrip = async (req, res) => {
 
          await schema.validateAsync(body);
 
-         console.log(id, user_name)
+         
 
         const tripId = await addTrip(body, id);
        
         if(!tripId){
             throwJsonError(400, "No se ha podido crear el viaje.")
         }
-        //validacion
-        console.log(tripId)
-
-
+       
+    
        res.status(201);
        res.send(`Viaje ${tripId} creado correctamente`)
 

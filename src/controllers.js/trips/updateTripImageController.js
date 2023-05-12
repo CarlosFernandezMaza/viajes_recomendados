@@ -4,8 +4,8 @@ const fs = require("fs").promises
 const randomstring = require("randomstring");
 const throwJsonError = require("../../errors/throwJsonError");
 const createJsonError = require("../../errors/createJsonError");
-const { findTripById, addAvatarimage } = require("../../repositories.js/usersRepository");
-const { addimage, findUserIdInTrip } = require("../../repositories.js/tripsRepositories");
+const { addAvatarimage } = require("../../repositories.js/usersRepository");
+const { addimage, findUserIdInTrip, findTripById } = require("../../repositories.js/tripsRepositories");
 const sharp = require("sharp")
 
 const updateTripImage = async (req, res) =>{

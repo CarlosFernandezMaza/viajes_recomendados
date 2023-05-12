@@ -10,6 +10,7 @@ const deleteTripController = async (req, res) => {
     const { id } = req.params;
     const { auth } = req;
 
+   
     await schema.validateAsync(id)
 
     const trip = await deleteTrip(id, auth.id);

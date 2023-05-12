@@ -1,22 +1,74 @@
 const { getConnection } = require("../infraestructure/database");
 
 
+const findTrips = async(query) => {
+  console.log(query)
+  const pool = await getConnection();
+  let sql = `SELECT * FROM trips`;
+
+  let hasWhere = 0;
+    for (let data in query){
+
+      if(!hasWhere){
+        sql += ` WHERE`;
+        hasWhere = 1;
+      }else {
+        sql += ` AND`
+      }
+      if (typeof value === 'object') {
+        sql += ` ${data} IN (?)`;
+      } else {
+        sql += ` ${data} = ?`;
+      }
+  
+    }
+    console.log(sql)
+  
+  const [trips] = await pool.query(sql, [...Object.values(query)]);
+
+  return [trips, sql];
+}
+
+const findTripsOrderByVotes = async(query) => {
+  delete query.orderby
+  
+  const pool = await getConnection();
+  let sql = `SELECT trips.*, COUNT(votes.id) AS votes FROM trips
+  LEFT JOIN votes ON trips.id = votes.IdTrip`;
 
 
-const findAllTrips = async() => {
+  let hasWhere = 0;
+    for (let datos in query){
 
-const pool = await getConnection();
-  const sql = `SELECT * FROM trips`;
-  const [trips] = await pool.query(sql);
+      if(!hasWhere){
+        sql += ` WHERE`;
+        hasWhere = 1;
+      }else {
+        sql += ` AND`
+      }
+      if (typeof value === 'object') {
+        sql += ` ${datos} IN (?)`;
+      } else {
+        sql += ` ${datos} = ?`;
+      }
+  
+    }
+    sql += ` GROUP BY trips.id ORDER BY votes DESC`
+    
+  
+  const [trips] = await pool.query(sql, [...Object.values(query)]);
 
-  return { trips };
+  return [trips];
 
-  }
+};
+
   
 
 const findTripById = async (ID) => {
+  
   const pool = await getConnection();
   const sql = `SELECT * FROM trips WHERE ID = ?`;
+  
   const [trips] = await pool.query(sql, [ID]);
 
   return trips[0];
@@ -31,59 +83,7 @@ const findUserIdInTrip = async (idTrip) => {
   return id;
 }
 
-const findTripByCity = async (city) => {
-  const pool = await getConnection();
-  const sql = `SELECT * FROM trips WHERE city = ?`;
-  const [trips] = await pool.query(sql, [city]);
 
-  return trips;
-};
-
-const findTripByCategory = async (category) => {
-  const pool = await getConnection();
-  const sql = `SELECT * FROM trips WHERE category = ?`;
-  const [trips] = await pool.query(sql, [category]);
-
-  return trips;
-};
-
-
-const findTripByCityAndCategory = async (city, category) => {
-  const pool = await getConnection();
-  const sql = `SELECT * FROM trips WHERE city = ? AND category = ?`;
-  const [trips] = await pool.query(sql, [city, category]);
-
-  return trips;
-};
-
-
-
-const tripsCityOrderByVotes = async (city) => {
-  const pool = await getConnection();
-  const sql = `SELECT * FROM trips WHERE city = ? ORDER BY votes DESC;`;
-  const [trips] = await pool.query(sql, [city]);
-
-  return trips;
-
-};
-
-const tripsCategoryOrderByVotes = async (category) => {
-  const pool = await getConnection();
-  const sql = `SELECT * FROM trips WHERE category = ? ORDER BY votes DESC;`;
-  const [trips] = await pool.query(sql, [category]);
-
-  return trips;
-
-};
-
-const tripsCityCategoryOrderByVotes = async (city, category) => {
-  const pool = await getConnection();
-  const sql = `SELECT * FROM trips WHERE city = ? AND category = ? ORDER BY votes DESC;`;
-  const [trips] = await pool.query(sql, [city, category]);
-
-  return trips;
-
-};
 
 const addTrip = async(body, id) => {
 
@@ -127,17 +127,12 @@ const deleteTrip = async (id, userId) => {
 
 
   module.exports = {
-  findAllTrips,
+  findTrips,
   findTripById,
-  findTripByCity,
-  findTripByCategory,
-  findTripByCityAndCategory,
-  tripsCategoryOrderByVotes,
-  tripsCityOrderByVotes,
-  tripsCityCategoryOrderByVotes,
   addTrip,
   addimage,
   findUserIdInTrip,
-  deleteTrip
+  deleteTrip,
+  findTripsOrderByVotes
   
   }

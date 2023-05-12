@@ -27,7 +27,7 @@ const loginUser = async(req, res) => {
             throwJsonError(403, "No existe un usuario con ese email y/o contraseña")
         }
 
-        const {id, user_name, password: passwordHash, createAt, role} = user;
+        const {id, userName, password: passwordHash, createAt, role} = user;
 
         const isValidPassword = await bcrypt.compare(password, passwordHash)
 
@@ -42,19 +42,19 @@ const loginUser = async(req, res) => {
         const {JWT_SECRET} = process.env
         const tokenPayLoad = {
             id,
-            user_name,
+            userName,
             email,
             role,
             
         }
 
         const token = jwt.sign(tokenPayLoad, JWT_SECRET, {
-            expiresIn: "20m"
+            expiresIn: "20d"
         })
 
         const response = {
             accesToken: token,
-            expiresIn: "20m"
+            expiresIn: "20d"
         }
 
 

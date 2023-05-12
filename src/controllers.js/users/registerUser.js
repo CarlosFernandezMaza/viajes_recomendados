@@ -13,8 +13,8 @@ const { findUserByEmail, createUser } = require("../../repositories.js/usersRepo
 
 const schema = Joi.object().keys({
     name: Joi.string().min(4).max(120).required(),
-    lastname: Joi.string().min(4).max(120).required(),
-    user_name: Joi.string().min(4).max(120).required(),
+    lastName: Joi.string().min(4).max(120).required(),
+    userName: Joi.string().min(4).max(120).required(),
     email: Joi.string().email().required(),
     password: Joi.string().min(6).max(20).required(),
     verifyPassword: Joi.ref("password"),
@@ -27,7 +27,7 @@ const registerUser = async (req, res) => {
     const {body} = req;
     await schema.validateAsync(body)
 
-    const {name, lastname, user_name, email, password, bio} = body;
+    const {name, lastName, userName, email, password, bio} = body;
 
     const user = await findUserByEmail(email);
     
@@ -39,12 +39,12 @@ const registerUser = async (req, res) => {
     const verificationCode = randomstring.generate(64);
 
     const userDB = {
-        name, lastname, user_name, email, passwordHash, verificationCode, bio
+        name, lastName, userName, email, passwordHash, verificationCode, bio
     }
 
     const userId = await createUser(userDB)
 
-    await sendEmailRegister(name, lastname, email, verificationCode)
+    await sendEmailRegister(name, lastName, email, verificationCode)
     
     
     res.status(201)

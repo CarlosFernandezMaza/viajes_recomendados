@@ -5,6 +5,7 @@ const { userRoutes } = require("./src/routes/userRoutes");
 const fileUpload = require("express-fileupload");
 const {tripsRoutes} = require("./src/routes/tripsRoutes");
 const {comentariesRoutes} = require("./src/routes/comentariesRoutes");
+const { votesRoutes } = require("./src/routes/votesRoutes");
 
 
 const app = express();
@@ -21,6 +22,7 @@ const port = PORT || 3000;
 app.use("/api/v1/users", userRoutes)
 app.use("/api/v1/trips", tripsRoutes)
 app.use("/api/v1/comentaries", comentariesRoutes)
+app.use("/api/v1/votes", votesRoutes)
 
 
 app.use((req, res) =>
