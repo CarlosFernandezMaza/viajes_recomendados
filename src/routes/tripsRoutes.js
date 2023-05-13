@@ -6,12 +6,15 @@ const updateTripImage = require("../controllers.js/trips/updateTripImageControll
 const { deleteTripController } = require("../controllers.js/trips/deleteTripController");
 const getTrips = require("../controllers.js/trips/tripsController");
 const getTripById = require("../controllers.js/trips/getTripByIdController");
+const getTripByUserName = require("../controllers.js/trips/getTripsByUserNameController");
 
 
 
 //endpoints publicos
 tripsRoutes.get('/', getTrips);
 tripsRoutes.get('/:id', getTripById);
+tripsRoutes.get('/userName/:userName', getTripByUserName);
+
 
 
 //endpoints privados

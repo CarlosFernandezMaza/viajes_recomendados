@@ -125,6 +125,14 @@ const deleteTrip = async (id, userId) => {
   return trip[0];
 };
 
+const findTripsByUserName = async(userName) => {
+    const pool = await getConnection();
+    const sql = ` SELECT title, trips.createAt, dateExperience, category, city, excerpt, description, trips.image, userName, email FROM trips LEFT JOIN users ON users.id = trips.IdUser WHERE userName = ? `;
+    const [trips] = await pool.query(sql, [userName ]);
+      return trips;
+
+}
+
 
   module.exports = {
   findTrips,
@@ -133,6 +141,7 @@ const deleteTrip = async (id, userId) => {
   addimage,
   findUserIdInTrip,
   deleteTrip,
-  findTripsOrderByVotes
+  findTripsOrderByVotes,
+  findTripsByUserName
   
   }
