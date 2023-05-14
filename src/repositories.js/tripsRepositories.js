@@ -55,6 +55,7 @@ const findTripsOrderByVotes = async(query) => {
     }
     sql += ` GROUP BY trips.id ORDER BY votes DESC`
     
+    
   
   const [trips] = await pool.query(sql, [...Object.values(query)]);
 
@@ -127,7 +128,7 @@ const deleteTrip = async (id, userId) => {
 
 const findTripsByUserName = async(userName) => {
     const pool = await getConnection();
-    const sql = ` SELECT title, trips.createAt, dateExperience, category, city, excerpt, description, trips.image, userName, email FROM trips LEFT JOIN users ON users.id = trips.IdUser WHERE userName = ? `;
+    const sql = ` SELECT trips.*,users.userName, COUNT(votes.id) AS votes FROM trips LEFT JOIN votes ON trips.id = votes.IdTrip left join users on users.id = trips.IdUser where username = ? GROUP BY trips.id ORDER BY votes DESC; `;
     const [trips] = await pool.query(sql, [userName ]);
       return trips;
 
