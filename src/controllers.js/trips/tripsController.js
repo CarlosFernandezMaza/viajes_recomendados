@@ -31,6 +31,11 @@ const getTrips = async (req, res) => {
         }else{
          
           const tripsOrdered = await findTripsOrderByVotes(query);
+          console.log(tripsOrdered)
+          if (tripsOrdered.length === 0) {
+            throwJsonError(400, `No se han encontrado viajes por en la base de datos`)
+          }
+
           res.status(200)
           res.send(tripsOrdered)
         }

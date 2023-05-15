@@ -59,7 +59,7 @@ const findTripsOrderByVotes = async(query) => {
   
   const [trips] = await pool.query(sql, [...Object.values(query)]);
 
-  return [trips];
+  return trips;
 
 };
 

@@ -15,7 +15,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"martin 2\",\r\n    \"lastName\": \"agusti 2\",\r\n    \"userName\": \"martinagustii\",\r\n    \"email\": \"martinagusti@hotmail.com\",\r\n    \"password\": \"123456\",\r\n    \"verifyPassword\":\"123456\",\r\n    \"bio\": \"Mi nombre es martin me gusta viajar por el mundo.\"\r\n\r\n}",
+							"raw": "{\r\n    \"name\": \"martin 4\",\r\n    \"lastName\": \"agusti4\",\r\n    \"userName\": \"martinagust4\",\r\n    \"email\": \"martinhagusti@gmail.com\",\r\n    \"password\": \"123456\",\r\n    \"verifyPassword\":\"123456\",\r\n    \"bio\": \"Mi nombre es martin me gusta viajar por el mundo.\"\r\n\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -41,8 +41,31 @@
 				{
 					"name": "loginUser",
 					"request": {
-						"method": "GET",
-						"header": []
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"martinagusti@hotmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/users/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"login"
+							]
+						}
 					},
 					"response": []
 				},
@@ -52,8 +75,8 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "href=\"http://localhost:3000/api/v1/users/activation?code=i7JoTdx2jpIZP6FJtkuHuXxbUbSZtBlSLkPODDH2u8FL69lYuDFwGfFcqV2F8bK1\"",
-							"protocol": "href=\"http",
+							"raw": "http://localhost:3000/api/v1/users/activation?code=R4jHlAII3VT1mhXzYEFcZnUu6vk4OlSXxfVTtJ62htV26F0kPcfOjalyskodxBro",
+							"protocol": "http",
 							"host": [
 								"localhost"
 							],
@@ -67,7 +90,7 @@
 							"query": [
 								{
 									"key": "code",
-									"value": "i7JoTdx2jpIZP6FJtkuHuXxbUbSZtBlSLkPODDH2u8FL69lYuDFwGfFcqV2F8bK1\""
+									"value": "R4jHlAII3VT1mhXzYEFcZnUu6vk4OlSXxfVTtJ62htV26F0kPcfOjalyskodxBro"
 								}
 							]
 						}
@@ -91,7 +114,7 @@
 								{
 									"key": "avatar",
 									"type": "file",
-									"src": "/C:/Users/Usuario/Pictures/benja3.jpg"
+									"src": "/C:/Users/Usuario/Pictures/paris.jpg"
 								}
 							]
 						},
@@ -125,7 +148,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"martin horacio\",\r\n    \"lastName\": \"agusti\",\r\n    \"userName\": \"martinagusti2\",\r\n    \"password\": \"123456\",\r\n    \"verifyPassword\":\"123456\",\r\n    \"bio\": \"Mi nombre es martin y me gusta programar!\"\r\n\r\n}",
+							"raw": "{\r\n    \"name\": \"martin\",\r\n    \"lastName\": \"agusti\",\r\n    \"userName\": \"martinagusti3\",\r\n    \"password\": \"123456\",\r\n    \"verifyPassword\":\"123456\",\r\n    \"bio\": \"Mi nombre es martin y me gusta programar!\"\r\n\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -155,7 +178,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/v1/users/1",
+							"raw": "http://localhost:3000/api/v1/users/18",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -165,7 +188,7 @@
 								"api",
 								"v1",
 								"users",
-								"1"
+								"18"
 							]
 						}
 					},
@@ -180,7 +203,21 @@
 					"name": "getTripById",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/trips/28",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"trips",
+								"28"
+							]
+						}
 					},
 					"response": []
 				},
@@ -209,7 +246,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"Viaje a madagascar\",\r\n    \"dateExperience\": \"2022-07-20\",\r\n    \"category\": \"viaje-playero\",\r\n    \"city\": \"madagascar\",\r\n    \"excerpt\": \"Playas de Barcelona\",\r\n    \"description\": \"Fin de semana en madagascar!\"\r\n\r\n    \r\n}",
+							"raw": "{\r\n    \"title\": \"Viaje a Rosario\",\r\n    \"dateExperience\": \"2023-05-10\",\r\n    \"category\": \"viaje-familiar\",\r\n    \"city\": \"Rosario\",\r\n    \"excerpt\": \"Dia de Shopping\",\r\n    \"description\": \"Muy bueno para pasar el dia\"\r\n\r\n    \r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -236,20 +273,26 @@
 				{
 					"name": "updateTripImage",
 					"request": {
-						"method": "POST",
+						"method": "PATCH",
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer ",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwidXNlck5hbWUiOiJtYXJ0aW5hZ3VzdGkzIiwiZW1haWwiOiJtYXJ0aW5hZ3VzdGlAaG90bWFpbC5jb20iLCJyb2xlIjoidXNlciIsImlhdCI6MTY4NDEzNzY1NCwiZXhwIjoxNjg1ODY1NjU0fQ.Ct95gV10HxafYJqCv0idXwbG4cpwKQ5fiyo4ACQi-jo",
 								"type": "default"
 							}
 						],
 						"body": {
 							"mode": "formdata",
-							"formdata": []
+							"formdata": [
+								{
+									"key": "tripImage",
+									"type": "file",
+									"src": "/C:/Users/Usuario/Desktop/grievous.jpg"
+								}
+							]
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/v1/trips/upload",
+							"raw": "http://localhost:3000/api/v1/trips/upload/26",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -259,7 +302,8 @@
 								"api",
 								"v1",
 								"trips",
-								"upload"
+								"upload",
+								"26"
 							]
 						}
 					},
@@ -277,7 +321,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3000/api/v1/trips/6.1",
+							"raw": "http://localhost:3000/api/v1/trips/32",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -287,7 +331,7 @@
 								"api",
 								"v1",
 								"trips",
-								"6.1"
+								"32"
 							]
 						}
 					},
@@ -299,7 +343,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/v1/trips?orderby=true&&category=viaje-familiar&&city=galicia",
+							"raw": "http://localhost:3000/api/v1/trips/",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -308,29 +352,8 @@
 							"path": [
 								"api",
 								"v1",
-								"trips"
-							],
-							"query": [
-								{
-									"key": "orderby",
-									"value": "true"
-								},
-								{
-									"key": null,
-									"value": null
-								},
-								{
-									"key": "category",
-									"value": "viaje-familiar"
-								},
-								{
-									"key": null,
-									"value": null
-								},
-								{
-									"key": "city",
-									"value": "galicia"
-								}
+								"trips",
+								""
 							]
 						}
 					},
@@ -342,7 +365,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/v1/trips?category=viaje-familiar&&city=sabadell&&orderby=true",
+							"raw": "http://localhost:3000/api/v1/trips?category=viaje-playero&&city=galicia&&orderby=true",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -356,7 +379,7 @@
 							"query": [
 								{
 									"key": "category",
-									"value": "viaje-familiar"
+									"value": "viaje-playero"
 								},
 								{
 									"key": null,
@@ -364,7 +387,7 @@
 								},
 								{
 									"key": "city",
-									"value": "sabadell"
+									"value": "galicia"
 								},
 								{
 									"key": null,
@@ -383,7 +406,22 @@
 					"name": "getTripsByUserName",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/trips/userName/martinagusti3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"trips",
+								"userName",
+								"martinagusti3"
+							]
+						}
 					},
 					"response": []
 				}
@@ -405,7 +443,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"comentaries\":\" affnasncoasn\",\r\n    \"vote\":\"1\"\r\n}",
+							"raw": "{\r\n    \"comentaries\":\" Muy bueno este viaje para realizarlo en pareja\"\r\n   \r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -413,7 +451,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/v1/comentaries/62/",
+							"raw": "http://localhost:3000/api/v1/comentaries/",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -423,7 +461,6 @@
 								"api",
 								"v1",
 								"comentaries",
-								"62",
 								""
 							]
 						}
@@ -431,10 +468,42 @@
 					"response": []
 				},
 				{
-					"name": "getComentaries",
+					"name": "getComentariesByIdTrip",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwidXNlck5hbWUiOiJtYXJ0aW5hZ3VzdGkiLCJlbWFpbCI6Im1hcnRpbmFndXN0aUBob3RtYWlsLmNvbSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjgzODkyNDEzLCJleHAiOjE2ODU2MjA0MTN9.NbP7PnQj73MXc0Ur4aHkGiSseStu-03-dZsXUEXOGQE",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/comentaries/31",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"comentaries",
+								"31"
+							]
+						}
 					},
 					"response": []
 				}
@@ -449,7 +518,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/v1/votes/",
+							"raw": "http://localhost:3000/api/v1/votes/31",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -459,7 +528,7 @@
 								"api",
 								"v1",
 								"votes",
-								""
+								"31"
 							]
 						}
 					},
